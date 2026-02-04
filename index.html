@@ -19,6 +19,7 @@
         <button class="nav-btn" data-view="map">Map View</button>
         <button class="nav-btn" data-view="expenses">Expenses</button>
         <button class="nav-btn" data-view="mileage">Mileage</button>
+        <button class="nav-btn" data-view="planner">Planner</button>
     </nav>
 
     <main>
@@ -90,6 +91,16 @@
                     <div class="form-group">
                         <label for="input-tags">Tags</label>
                         <input type="text" id="input-tags" placeholder="e.g. networking, tech, vendor (comma separated)" />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="input-followup-date">Follow-up Date</label>
+                            <input type="date" id="input-followup-date" />
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="input-followup-note">Follow-up Reminder</label>
+                            <input type="text" id="input-followup-note" placeholder="e.g. Send quote, Call back" />
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full">Save Contact</button>
                 </form>
@@ -292,6 +303,71 @@
                 <div id="mileage-list"></div>
                 <div id="no-mileage" style="display:none;">
                     <p>No trips logged yet. Add your first trip above!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLANNER VIEW -->
+        <section id="planner-view" class="view">
+            <div class="planner-container">
+                <!-- Date navigation -->
+                <div class="planner-date-nav">
+                    <button class="btn btn-secondary" id="planner-prev">&larr;</button>
+                    <div class="planner-date-display">
+                        <h2 id="planner-date-title"></h2>
+                        <button class="btn-link" id="planner-today">Today</button>
+                    </div>
+                    <button class="btn btn-secondary" id="planner-next">&rarr;</button>
+                </div>
+
+                <!-- Week strip -->
+                <div class="planner-week" id="planner-week"></div>
+
+                <!-- Reminders due -->
+                <div id="planner-reminders"></div>
+
+                <!-- Day events -->
+                <div class="planner-add-event">
+                    <h3>Add to Schedule</h3>
+                    <form id="event-form">
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label for="event-title">What</label>
+                                <input type="text" id="event-title" placeholder="Meeting, call, job site visit..." required />
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="event-time">Time</label>
+                                <input type="time" id="event-time" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label for="event-end-time">End Time</label>
+                                <input type="time" id="event-end-time" />
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="event-contact">Link Contact</label>
+                                <select id="event-contact">
+                                    <option value="">None</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-location">Location</label>
+                            <input type="text" id="event-location" placeholder="Address or place name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="event-notes">Notes</label>
+                            <input type="text" id="event-notes" placeholder="Details..." />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Add to Schedule</button>
+                    </form>
+                </div>
+
+                <!-- Day schedule -->
+                <div id="planner-events"></div>
+                <div id="no-events" style="display:none;">
+                    <p>Nothing scheduled for this day. Add something above!</p>
                 </div>
             </div>
         </section>

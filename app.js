@@ -6,6 +6,7 @@
 const STORAGE_KEY = 'cardstash_contacts';
 const EXPENSES_KEY = 'cardstash_expenses';
 const MILEAGE_KEY = 'cardstash_mileage';
+const EVENTS_KEY = 'cardstash_events';
 
 // IRS standard mileage rate (2024)
 const MILEAGE_RATE = 0.67;
@@ -14,6 +15,8 @@ const MILEAGE_RATE = 0.67;
 let contacts = loadContacts();
 let expenses = loadExpenses();
 let mileageTrips = loadMileage();
+let plannerEvents = loadEvents();
+let plannerDate = new Date();
 let currentCardImage = null;
 let currentReceiptImage = null;
 let cameraStream = null;
@@ -62,6 +65,7 @@ navBtns.forEach(btn => {
         if (viewName === 'map') initMap();
         if (viewName === 'expenses') renderExpenses();
         if (viewName === 'mileage') renderMileage();
+        if (viewName === 'planner') renderPlanner();
     });
 });
 
@@ -228,6 +232,8 @@ contactForm.addEventListener('submit', (e) => {
         website: document.getElementById('input-website').value.trim(),
         notes: document.getElementById('input-notes').value.trim(),
         tags: document.getElementById('input-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        followUpDate: document.getElementById('input-followup-date').value || null,
+        followUpNote: document.getElementById('input-followup-note').value.trim() || null,
         cardImage: currentCardImage,
         createdAt: new Date().toISOString(),
         lat: null,
@@ -290,6 +296,18 @@ function saveMileage() {
     localStorage.setItem(MILEAGE_KEY, JSON.stringify(mileageTrips));
 }
 
+function loadEvents() {
+    try {
+        return JSON.parse(localStorage.getItem(EVENTS_KEY)) || [];
+    } catch {
+        return [];
+    }
+}
+
+function saveEvents() {
+    localStorage.setItem(EVENTS_KEY, JSON.stringify(plannerEvents));
+}
+
 // ============================================================
 // Contacts List
 // ============================================================
@@ -342,6 +360,7 @@ function renderContacts() {
             </div>
             ${c.tags.length ? `<div class="contact-tags">${c.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
             ${c.notes ? `<div class="contact-notes-preview">${escapeHtml(c.notes.substring(0, 80))}${c.notes.length > 80 ? '...' : ''}</div>` : ''}
+            ${c.followUpDate ? `<div class="contact-followup ${new Date(c.followUpDate + 'T23:59:59') < new Date() ? 'overdue' : ''}">Follow up ${c.followUpDate}${c.followUpNote ? ': ' + escapeHtml(c.followUpNote) : ''}</div>` : ''}
         </div>
     `).join('');
 
@@ -373,6 +392,7 @@ function openContactModal(id) {
             ${c.address ? `<p><strong>Address:</strong> ${escapeHtml(c.address)}</p>` : ''}
         </div>
         ${c.notes ? `<div class="modal-notes"><h4>Notes</h4><p>${escapeHtml(c.notes)}</p></div>` : ''}
+        ${c.followUpDate ? `<div class="modal-followup ${new Date(c.followUpDate + 'T23:59:59') < new Date() ? 'overdue' : ''}"><h4>Follow-up: ${c.followUpDate}</h4>${c.followUpNote ? `<p>${escapeHtml(c.followUpNote)}</p>` : ''}<button class="btn btn-secondary btn-sm" onclick="markFollowUpDone('${c.id}')">Mark Done</button></div>` : ''}
         ${c.tags.length ? `<div class="modal-tags">${c.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
         <p class="modal-date">Added ${new Date(c.createdAt).toLocaleDateString()}</p>
         <div class="modal-actions">
@@ -391,6 +411,16 @@ contactModal.addEventListener('click', (e) => {
 function deleteContact(id) {
     if (!confirm('Delete this contact?')) return;
     contacts = contacts.filter(c => c.id !== id);
+    saveContacts();
+    contactModal.style.display = 'none';
+    renderContacts();
+}
+
+function markFollowUpDone(id) {
+    const c = contacts.find(x => x.id === id);
+    if (!c) return;
+    c.followUpDate = null;
+    c.followUpNote = null;
     saveContacts();
     contactModal.style.display = 'none';
     renderContacts();
@@ -418,6 +448,8 @@ function editContact(id) {
     document.getElementById('input-website').value = c.website;
     document.getElementById('input-notes').value = c.notes;
     document.getElementById('input-tags').value = c.tags.join(', ');
+    document.getElementById('input-followup-date').value = c.followUpDate || '';
+    document.getElementById('input-followup-note').value = c.followUpNote || '';
 
     if (c.cardImage) {
         currentCardImage = c.cardImage;
@@ -895,6 +927,184 @@ function renderMileage() {
         });
     });
 }
+
+// ============================================================
+// DAILY PLANNER
+// ============================================================
+const eventForm = document.getElementById('event-form');
+
+function formatDateKey(date) {
+    return date.toISOString().split('T')[0];
+}
+
+function formatDisplayDate(date) {
+    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+document.getElementById('planner-prev').addEventListener('click', () => {
+    plannerDate.setDate(plannerDate.getDate() - 1);
+    renderPlanner();
+});
+
+document.getElementById('planner-next').addEventListener('click', () => {
+    plannerDate.setDate(plannerDate.getDate() + 1);
+    renderPlanner();
+});
+
+document.getElementById('planner-today').addEventListener('click', () => {
+    plannerDate = new Date();
+    renderPlanner();
+});
+
+function renderPlanner() {
+    const dateKey = formatDateKey(plannerDate);
+    const todayKey = formatDateKey(new Date());
+
+    // Title
+    document.getElementById('planner-date-title').textContent = formatDisplayDate(plannerDate);
+
+    // Week strip
+    const weekContainer = document.getElementById('planner-week');
+    const startOfWeek = new Date(plannerDate);
+    startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+
+    let weekHtml = '';
+    for (let i = 0; i < 7; i++) {
+        const d = new Date(startOfWeek);
+        d.setDate(d.getDate() + i);
+        const dk = formatDateKey(d);
+        const isToday = dk === todayKey;
+        const isSelected = dk === dateKey;
+        const hasEvents = plannerEvents.some(e => e.date === dk) ||
+            contacts.some(c => c.followUpDate === dk);
+        weekHtml += `
+            <button class="week-day ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''}" data-date="${dk}">
+                <span class="week-day-name">${d.toLocaleDateString('en-US', { weekday: 'short' })}</span>
+                <span class="week-day-num">${d.getDate()}</span>
+                ${hasEvents ? '<span class="week-day-dot"></span>' : ''}
+            </button>
+        `;
+    }
+    weekContainer.innerHTML = weekHtml;
+
+    weekContainer.querySelectorAll('.week-day').forEach(btn => {
+        btn.addEventListener('click', () => {
+            plannerDate = new Date(btn.dataset.date + 'T12:00:00');
+            renderPlanner();
+        });
+    });
+
+    // Populate contact dropdown in event form
+    const contactSelect = document.getElementById('event-contact');
+    contactSelect.innerHTML = '<option value="">None</option>';
+    contacts.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name + (c.company ? ` (${c.company})` : '');
+        contactSelect.appendChild(opt);
+    });
+
+    // Reminders due on this day
+    const remindersContainer = document.getElementById('planner-reminders');
+    const dueReminders = contacts.filter(c => c.followUpDate === dateKey);
+    if (dueReminders.length > 0) {
+        remindersContainer.innerHTML = `
+            <div class="reminders-section">
+                <h3>Follow-ups Due</h3>
+                ${dueReminders.map(c => `
+                    <div class="reminder-item">
+                        <div class="reminder-info">
+                            <strong>${escapeHtml(c.name)}</strong>
+                            ${c.followUpNote ? `<span>${escapeHtml(c.followUpNote)}</span>` : ''}
+                        </div>
+                        <div class="reminder-actions">
+                            ${c.phone ? `<a href="tel:${escapeHtml(c.phone)}" class="btn btn-secondary btn-sm">Call</a>` : ''}
+                            ${c.email ? `<a href="mailto:${escapeHtml(c.email)}" class="btn btn-secondary btn-sm">Email</a>` : ''}
+                            <button class="btn btn-primary btn-sm" onclick="markFollowUpDone('${c.id}'); renderPlanner();">Done</button>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else {
+        remindersContainer.innerHTML = '';
+    }
+
+    // Day events
+    const dayEvents = plannerEvents
+        .filter(e => e.date === dateKey)
+        .sort((a, b) => (a.time || '').localeCompare(b.time || ''));
+
+    const eventsContainer = document.getElementById('planner-events');
+    const noEvents = document.getElementById('no-events');
+
+    if (dayEvents.length === 0 && dueReminders.length === 0) {
+        eventsContainer.innerHTML = '';
+        noEvents.style.display = 'block';
+    } else {
+        noEvents.style.display = 'none';
+        eventsContainer.innerHTML = dayEvents.map(ev => {
+            const linkedContact = ev.contactId ? contacts.find(c => c.id === ev.contactId) : null;
+            return `
+                <div class="planner-event">
+                    <div class="event-time-col">
+                        ${ev.time ? `<span class="event-time">${formatTime(ev.time)}</span>` : '<span class="event-time">All day</span>'}
+                        ${ev.endTime ? `<span class="event-end-time">to ${formatTime(ev.endTime)}</span>` : ''}
+                    </div>
+                    <div class="event-details">
+                        <strong>${escapeHtml(ev.title)}</strong>
+                        ${ev.location ? `<span class="event-location">${escapeHtml(ev.location)}</span>` : ''}
+                        ${linkedContact ? `<span class="event-contact-link">${escapeHtml(linkedContact.name)}</span>` : ''}
+                        ${ev.notes ? `<span class="event-notes">${escapeHtml(ev.notes)}</span>` : ''}
+                    </div>
+                    <button class="btn-icon delete-event" data-id="${ev.id}" title="Delete">&times;</button>
+                </div>
+            `;
+        }).join('');
+
+        eventsContainer.querySelectorAll('.delete-event').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (confirm('Delete this event?')) {
+                    plannerEvents = plannerEvents.filter(e => e.id !== btn.dataset.id);
+                    saveEvents();
+                    renderPlanner();
+                }
+            });
+        });
+    }
+}
+
+function formatTime(time24) {
+    const [h, m] = time24.split(':');
+    const hr = parseInt(h);
+    const ampm = hr >= 12 ? 'PM' : 'AM';
+    const hr12 = hr % 12 || 12;
+    return `${hr12}:${m} ${ampm}`;
+}
+
+eventForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('event-title').value.trim();
+    if (!title) return;
+
+    const event = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+        title: title,
+        date: formatDateKey(plannerDate),
+        time: document.getElementById('event-time').value || null,
+        endTime: document.getElementById('event-end-time').value || null,
+        contactId: document.getElementById('event-contact').value || null,
+        location: document.getElementById('event-location').value.trim(),
+        notes: document.getElementById('event-notes').value.trim(),
+        createdAt: new Date().toISOString()
+    };
+
+    plannerEvents.push(event);
+    saveEvents();
+    eventForm.reset();
+    renderPlanner();
+});
 
 // ============================================================
 // Initial render
