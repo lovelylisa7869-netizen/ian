@@ -10,35 +10,130 @@
 <body>
     <!-- HERO / LANDING -->
     <div id="hero">
-        <div class="hero-bg">
-            <div class="glass-closet">
-                <div class="closet-door left-door"></div>
-                <div class="closet-interior">
-                    <div class="hanger-row">
-                        <div class="hanger"><div class="garment g1"></div></div>
-                        <div class="hanger"><div class="garment g2"></div></div>
-                        <div class="hanger"><div class="garment g3"></div></div>
-                        <div class="hanger"><div class="garment g4"></div></div>
-                        <div class="hanger"><div class="garment g5"></div></div>
-                    </div>
-                    <div class="shelf">
-                        <div class="shoe s1"></div>
-                        <div class="shoe s2"></div>
-                        <div class="shoe s3"></div>
-                    </div>
-                </div>
-                <div class="closet-door right-door"></div>
-            </div>
+        <!-- Big anime closet SVG animation -->
+        <div class="hero-animation">
+            <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" class="closet-svg">
+                <!-- Glass closet frame -->
+                <defs>
+                    <linearGradient id="chrome-bar" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#444"/>
+                        <stop offset="30%" style="stop-color:#ccc"/>
+                        <stop offset="50%" style="stop-color:#fff"/>
+                        <stop offset="70%" style="stop-color:#ccc"/>
+                        <stop offset="100%" style="stop-color:#444"/>
+                    </linearGradient>
+                    <linearGradient id="glass-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.08)"/>
+                        <stop offset="50%" style="stop-color:rgba(255,255,255,0.02)"/>
+                        <stop offset="100%" style="stop-color:rgba(255,255,255,0.06)"/>
+                    </linearGradient>
+                    <linearGradient id="hanger-chrome" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#999"/>
+                        <stop offset="50%" style="stop-color:#ddd"/>
+                        <stop offset="100%" style="stop-color:#777"/>
+                    </linearGradient>
+                    <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                </defs>
+
+                <!-- Closet back wall -->
+                <rect x="50" y="30" width="500" height="350" rx="4" fill="#080808" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+                <!-- Chrome rail -->
+                <rect x="80" y="55" width="440" height="4" rx="2" fill="url(#chrome-bar)" filter="url(#glow)"/>
+
+                <!-- Garment 1 — Dark hoodie -->
+                <g class="garment-group" style="animation: sway-svg 3.2s ease-in-out infinite; transform-origin: 130px 57px;">
+                    <line x1="130" y1="57" x2="130" y2="70" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M110 70 Q120 65 130 63 Q140 65 150 70" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M108 72 L105 180 Q105 188 115 188 L145 188 Q155 188 155 180 L152 72 Q130 80 108 72Z" fill="#111" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                    <path d="M108 72 L95 120 L95 130 L108 110Z" fill="#0d0d0d"/>
+                    <path d="M152 72 L165 120 L165 130 L152 110Z" fill="#0d0d0d"/>
+                    <path d="M120 75 L125 80 L135 80 L140 75" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+                </g>
+
+                <!-- Garment 2 — Burgundy leather jacket -->
+                <g class="garment-group" style="animation: sway-svg 2.8s ease-in-out infinite -0.5s; transform-origin: 200px 57px;">
+                    <line x1="200" y1="57" x2="200" y2="68" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M178 68 Q189 63 200 61 Q211 63 222 68" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M176 70 L172 185 Q172 192 182 192 L218 192 Q228 192 228 185 L224 70 Q200 78 176 70Z" fill="#2a0a0a" stroke="rgba(139,0,0,0.3)" stroke-width="0.5"/>
+                    <path d="M176 70 L160 125 L162 135 L176 110Z" fill="#1f0808"/>
+                    <path d="M224 70 L240 125 L238 135 L224 110Z" fill="#1f0808"/>
+                    <line x1="200" y1="70" x2="200" y2="192" stroke="rgba(139,0,0,0.15)" stroke-width="0.5"/>
+                    <path d="M182 73 L188 77 L212 77 L218 73" fill="none" stroke="rgba(139,0,0,0.2)" stroke-width="0.5"/>
+                </g>
+
+                <!-- Garment 3 — Black Chrome Hearts tee (with cross detail) -->
+                <g class="garment-group" style="animation: sway-svg 3.5s ease-in-out infinite -1s; transform-origin: 270px 57px;">
+                    <line x1="270" y1="57" x2="270" y2="68" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M248 68 Q259 63 270 61 Q281 63 292 68" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M246 70 L248 175 Q248 182 258 182 L282 182 Q292 182 292 175 L294 70 Q270 78 246 70Z" fill="#0a0a0a" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                    <path d="M246 70 L232 110 L234 118 L248 100Z" fill="#080808"/>
+                    <path d="M294 70 L308 110 L306 118 L292 100Z" fill="#080808"/>
+                    <!-- Chrome Hearts cross on shirt -->
+                    <line x1="270" y1="105" x2="270" y2="145" stroke="rgba(192,192,192,0.25)" stroke-width="2"/>
+                    <line x1="258" y1="120" x2="282" y2="120" stroke="rgba(192,192,192,0.25)" stroke-width="2"/>
+                </g>
+
+                <!-- Garment 4 — Dark gray oversized shirt -->
+                <g class="garment-group" style="animation: sway-svg 3s ease-in-out infinite -1.5s; transform-origin: 340px 57px;">
+                    <line x1="340" y1="57" x2="340" y2="68" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M318 68 Q329 63 340 61 Q351 63 362 68" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M316 70 L314 190 Q314 196 324 196 L356 196 Q366 196 366 190 L364 70 Q340 80 316 70Z" fill="#181818" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                    <path d="M316 70 L300 118 L302 126 L316 108Z" fill="#141414"/>
+                    <path d="M364 70 L380 118 L378 126 L364 108Z" fill="#141414"/>
+                    <path d="M328 73 L333 77 L347 77 L352 73" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                </g>
+
+                <!-- Garment 5 — Black long coat -->
+                <g class="garment-group" style="animation: sway-svg 3.8s ease-in-out infinite -2s; transform-origin: 415px 57px;">
+                    <line x1="415" y1="57" x2="415" y2="66" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M390 66 Q402 61 415 59 Q428 61 440 66" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M388 68 L383 240 Q383 248 393 248 L437 248 Q447 248 447 240 L442 68 Q415 78 388 68Z" fill="#0c0c0c" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+                    <path d="M388 68 L372 125 L374 135 L388 112Z" fill="#0a0a0a"/>
+                    <path d="M442 68 L458 125 L456 135 L442 112Z" fill="#0a0a0a"/>
+                    <line x1="415" y1="68" x2="415" y2="248" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                    <path d="M398 70 L405 75 L425 75 L432 70" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+                </g>
+
+                <!-- Garment 6 — Dark purple/plum top -->
+                <g class="garment-group" style="animation: sway-svg 2.6s ease-in-out infinite -0.8s; transform-origin: 490px 57px;">
+                    <line x1="490" y1="57" x2="490" y2="68" stroke="url(#hanger-chrome)" stroke-width="2"/>
+                    <path d="M470 68 Q480 63 490 61 Q500 63 510 68" stroke="url(#hanger-chrome)" stroke-width="2.5" fill="none"/>
+                    <path d="M468 70 L470 170 Q470 176 478 176 L502 176 Q510 176 510 170 L512 70 Q490 78 468 70Z" fill="#15081a" stroke="rgba(80,0,120,0.2)" stroke-width="0.5"/>
+                    <path d="M468 70 L456 108 L458 115 L468 100Z" fill="#120616"/>
+                    <path d="M512 70 L524 108 L522 115 L512 100Z" fill="#120616"/>
+                </g>
+
+                <!-- Shelf line -->
+                <rect x="70" y="280" width="460" height="2" rx="1" fill="url(#chrome-bar)" opacity="0.5"/>
+
+                <!-- Shoes on shelf -->
+                <path d="M120 278 L115 300 Q115 308 125 308 L155 308 Q160 304 158 298 L148 278Z" fill="#0d0d0d" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                <path d="M220 278 L215 300 Q215 308 225 308 L255 308 Q260 304 258 298 L248 278Z" fill="#1a0808" stroke="rgba(139,0,0,0.15)" stroke-width="0.5"/>
+                <path d="M340 278 L335 300 Q335 308 345 308 L375 308 Q380 304 378 298 L368 278Z" fill="#111" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+                <path d="M440 278 L435 300 Q435 308 445 308 L475 308 Q480 304 478 298 L468 278Z" fill="#0a0a0a" stroke="rgba(192,192,192,0.1)" stroke-width="0.5"/>
+
+                <!-- Glass closet doors (front overlay) -->
+                <rect class="glass-door-left" x="50" y="30" width="250" height="350" rx="4" fill="url(#glass-shine)" stroke="rgba(255,255,255,0.1)" stroke-width="1" opacity="0.6"/>
+                <rect class="glass-door-right" x="300" y="30" width="250" height="350" rx="4" fill="url(#glass-shine)" stroke="rgba(255,255,255,0.1)" stroke-width="1" opacity="0.6"/>
+
+                <!-- Glass reflection lines -->
+                <line x1="100" y1="40" x2="80" y2="370" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                <line x1="200" y1="40" x2="180" y2="370" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="400" y1="40" x2="380" y2="370" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+                <line x1="480" y1="40" x2="460" y2="370" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+
+                <!-- Chrome door handles -->
+                <rect x="285" y="180" width="6" height="30" rx="3" fill="url(#chrome-bar)" filter="url(#glow)"/>
+                <rect x="309" y="180" width="6" height="30" rx="3" fill="url(#chrome-bar)" filter="url(#glow)"/>
+            </svg>
         </div>
+
         <div class="hero-content">
             <div class="hero-cross">&#10013;</div>
             <h1 class="hero-title">VirtualCloset</h1>
             <p class="hero-subtitle">W A R D R O B E</p>
-            <p class="hero-desc">Your dark luxury AI wardrobe. Curate. Style. Dominate.</p>
             <button id="enter-app-btn" class="btn btn-chrome">Enter the Vault</button>
-        </div>
-        <div class="hero-crosses">
-            <span>&#10013;</span><span>&#10013;</span><span>&#10013;</span>
         </div>
     </div>
 
