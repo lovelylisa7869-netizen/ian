@@ -5,19 +5,16 @@ const hero = document.getElementById('hero');
 const app = document.getElementById('app');
 const enterBtn = document.getElementById('enter-app-btn');
 
-// Open glass doors on load then allow enter
-setTimeout(() => { hero.classList.add('doors-open'); }, 600);
-
 enterBtn.addEventListener('click', () => {
     hero.style.opacity = '0';
-    hero.style.transition = 'opacity 0.6s ease';
+    hero.style.transition = 'opacity 0.5s ease';
     setTimeout(() => {
         hero.style.display = 'none';
         app.style.display = 'block';
         app.style.opacity = '0';
-        app.style.transition = 'opacity 0.5s ease';
+        app.style.transition = 'opacity 0.4s ease';
         requestAnimationFrame(() => { app.style.opacity = '1'; });
-    }, 600);
+    }, 500);
 });
 
 // ===== DATA LAYER =====
