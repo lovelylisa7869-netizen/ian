@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Made with Love — Meal Prep Planner</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-hearts" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="heart">♡</span>
+      <h1>Made with Love</h1>
+      <span class="tagline">a little cookbook &amp; meal planner just for you</span>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="cookbook">Cookbook</button>
+      <button class="tab" data-tab="planner">Week Planner</button>
+      <button class="tab" data-tab="grocery">Grocery List</button>
+      <button class="tab" data-tab="saved">Saved Plans</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- COOKBOOK -->
+    <section id="cookbook" class="view active">
+      <div class="view-head">
+        <div>
+          <h2>The Cookbook</h2>
+          <p class="sub">recipes i made for you — click any card to scale &amp; add it to your week ♡</p>
+        </div>
+        <button id="addRecipeBtn" class="btn btn-soft">+ new recipe</button>
+      </div>
+      <div id="recipeGrid" class="recipe-grid"></div>
+    </section>
+
+    <!-- WEEK PLANNER -->
+    <section id="planner" class="view">
+      <div class="view-head">
+        <div>
+          <h2>Week Planner</h2>
+          <p class="sub" id="weekLabel"></p>
+        </div>
+        <div class="week-nav">
+          <button class="btn btn-ghost" id="prevWeek">← prev</button>
+          <button class="btn btn-ghost" id="thisWeek">this week</button>
+          <button class="btn btn-ghost" id="nextWeek">next →</button>
+          <button class="btn btn-soft" id="savePlanBtn">♡ save plan</button>
+          <button class="btn btn-ghost" id="clearWeekBtn">clear week</button>
+        </div>
+      </div>
+      <div id="weekGrid" class="week-grid"></div>
+    </section>
+
+    <!-- GROCERY LIST -->
+    <section id="grocery" class="view">
+      <div class="view-head">
+        <div>
+          <h2>Grocery List</h2>
+          <p class="sub">auto-made from this week's meals — tap to check off ♡</p>
+        </div>
+        <div>
+          <button class="btn btn-ghost" id="copyList">copy list</button>
+          <button class="btn btn-ghost" id="uncheckAll">reset checks</button>
+        </div>
+      </div>
+      <div id="groceryList" class="grocery-list"></div>
+    </section>
+
+    <!-- SAVED PLANS -->
+    <section id="saved" class="view">
+      <div class="view-head">
+        <div>
+          <h2>Saved Plans</h2>
+          <p class="sub">your little library of weeks ♡</p>
+        </div>
+      </div>
+      <div id="savedList" class="saved-list"></div>
+    </section>
+  </main>
+
+  <!-- Recipe modal -->
+  <div id="recipeModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close>✕</button>
+      <div id="recipeModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Assign-to-day modal -->
+  <div id="assignModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card small">
+      <button class="modal-close" data-close>✕</button>
+      <h3>Add to your week</h3>
+      <p class="sub" id="assignRecipeName"></p>
+      <label class="field">
+        <span>How many days do you want to eat this?</span>
+        <input id="assignDays" type="number" min="1" max="7" value="3" />
+      </label>
+      <label class="field">
+        <span>Meals per day</span>
+        <select id="assignMealsPerDay">
+          <option value="1">1 meal / day</option>
+          <option value="2" selected>2 meals / day (leftovers lunch + dinner)</option>
+          <option value="3">3 meals / day</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Start on</span>
+        <select id="assignStartDay"></select>
+      </label>
+      <label class="field">
+        <span>Meal slot</span>
+        <select id="assignSlot">
+          <option value="breakfast">breakfast</option>
+          <option value="lunch" selected>lunch</option>
+          <option value="dinner">dinner</option>
+        </select>
+      </label>
+      <div class="scaled-preview" id="scaledPreview"></div>
+      <div class="modal-actions">
+        <button class="btn btn-soft" id="confirmAssign">add to week ♡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New/Edit recipe modal -->
+  <div id="editModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close>✕</button>
+      <h3 id="editTitle">New Recipe</h3>
+      <label class="field"><span>Name</span><input id="edName" type="text" placeholder="e.g. Honey Garlic Salmon"/></label>
+      <label class="field"><span>A little note from me ♡</span><input id="edNote" type="text" placeholder="the one you loved last winter..."/></label>
+      <label class="field"><span>Base servings</span><input id="edServings" type="number" min="1" value="4"/></label>
+      <label class="field"><span>Category</span>
+        <select id="edCategory">
+          <option>Mains</option><option>Breakfast</option><option>Lunch</option>
+          <option>Snacks</option><option>Sweets</option><option>Sides</option>
+        </select>
+      </label>
+      <label class="field"><span>Emoji</span><input id="edEmoji" type="text" maxlength="2" value="🍲"/></label>
+      <label class="field"><span>Ingredients (one per line — format: <code>amount unit item</code>, e.g. <code>2 cup rice</code>)</span>
+        <textarea id="edIngredients" rows="7" placeholder="1 lb chicken thigh&#10;2 tbsp olive oil&#10;1 tsp salt"></textarea>
+      </label>
+      <label class="field"><span>Instructions (one step per line)</span>
+        <textarea id="edSteps" rows="5" placeholder="preheat oven to 400&#10;season chicken..."></textarea>
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="deleteRecipeBtn" style="display:none">delete</button>
+        <button class="btn btn-soft" id="saveRecipeBtn">save recipe ♡</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <footer class="foot">made with <span class="heart">♡</span> for you</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
