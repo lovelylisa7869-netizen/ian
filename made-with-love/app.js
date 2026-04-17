@@ -975,7 +975,6 @@ function hideWelcome(){
 }
 document.getElementById('startCookingBtn')?.addEventListener('click', hideWelcome);
 document.getElementById('reopenLetter')?.addEventListener('click', showWelcome);
-document.getElementById('openEnvelopeBtn')?.addEventListener('click', openLetter);
 document.getElementById('envelope')?.addEventListener('click', openLetter);
 
 /* ============ close-modal wiring ============ */

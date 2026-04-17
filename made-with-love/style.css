@@ -298,74 +298,78 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 
 /* ================= envelope reveal ================= */
 .envelope-stage{
-  position:relative; width:100%; max-width:440px;
-  display:flex; flex-direction:column; align-items:center; gap:18px;
+  position:relative; width:360px; max-width:92vw;
+  display:block;
   animation: fadeIn .3s ease;
 }
 .envelope-stage.hidden{ display:none; }
 .envelope-stage .modal-close{
-  top:-12px; right:-12px;
+  position:absolute; top:-16px; right:-16px; z-index:5;
 }
+
+/* envelope is a button — reset default button styles */
 .envelope{
+  appearance:none; -webkit-appearance:none;
+  display:block; padding:0; margin:0 auto;
+  background:transparent; border:none; font:inherit; color:inherit;
   position:relative;
-  width:360px; max-width:92vw; height:220px;
+  width:360px; max-width:100%; height:240px;
   cursor:pointer;
   filter: drop-shadow(0 18px 40px rgba(107,74,53,.3)) drop-shadow(0 3px 6px rgba(107,74,53,.18));
   transition: transform .25s ease;
 }
 .envelope:hover{ transform: translateY(-4px) rotate(-.5deg); }
+.envelope:focus{ outline:none; }
+.envelope:focus-visible{ outline:2px solid var(--strawberry); outline-offset:6px; border-radius:8px; }
 
-/* body: back panel of envelope (cream rectangle) */
 .env-body{
-  position:absolute; inset:0;
+  position:absolute; inset:0; display:block;
   background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
   border:2px solid var(--cream-edge);
   border-radius:6px;
 }
 
-/* flap: triangle from top corners down to center — the closed flap of the envelope */
+/* flap: triangle pointing down from top — exactly 50% of envelope height */
 .env-flap{
-  position:absolute; top:-2px; left:-2px; right:-2px;
-  height:60%;
-  background: linear-gradient(180deg, var(--cream-deep) 0%, #e9d7ae 100%);
+  position:absolute; top:-2px; left:-2px; right:-2px; display:block;
+  height:calc(50% + 2px);
+  background: linear-gradient(180deg, var(--cream-deep) 0%, #ead8ad 100%);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  border-top:2px solid var(--cream-edge);
   z-index:2;
 }
-.env-flap::after{
-  /* subtle crease line along the fold */
-  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
-  background: rgba(107,74,53,.18);
-}
 
-/* recipient text on the front, below the flap */
+/* recipient text sits in the bottom half, well below the flap tip + seal */
 .env-text{
-  position:absolute; left:0; right:0; bottom:24px;
+  position:absolute; left:0; right:0; top:62%; display:block;
   text-align:center; z-index:1;
 }
 .env-to{
+  display:block;
   font-family:'Quicksand', sans-serif; font-size:10px; letter-spacing:.3em;
   color:var(--muted); text-transform:uppercase;
 }
 .env-name{
-  font-family:'Caveat', cursive; font-size:40px; font-weight:700;
-  color:var(--strawberry-d); margin-top:2px; line-height:1;
+  display:block;
+  font-family:'Caveat', cursive; font-size:44px; font-weight:700;
+  color:var(--strawberry-d); margin-top:6px; line-height:1;
 }
 
-/* wax seal — sits right at the tip of the folded flap */
+/* wax seal — sits right at the tip of the folded flap (50% down) */
 .env-seal{
-  position:absolute; top:calc(60% - 26px); left:50%; transform:translateX(-50%);
-  width:52px; height:52px; border-radius:50%;
+  position:absolute; top:50%; left:50%;
+  width:54px; height:54px; border-radius:50%;
+  transform:translate(-50%, -50%);
   background: radial-gradient(circle at 35% 32%, var(--strawberry-l), var(--strawberry) 55%, var(--strawberry-d) 100%);
-  color:#fff; font-size:26px; display:grid; place-items:center;
+  color:#fff; font-size:26px;
+  display:flex; align-items:center; justify-content:center;
   box-shadow: 0 4px 10px rgba(166,94,98,.45), inset 0 -3px 4px rgba(0,0,0,.18), inset 0 2px 2px rgba(255,255,255,.25);
   z-index:3;
 }
 
-.open-envelope-btn{ font-size:15px; }
 .env-hint{
-  font-family:'Quicksand', sans-serif; font-size:12px; color:var(--muted);
-  font-style:italic; margin:-4px 0 0;
+  font-family:'Quicksand', sans-serif; font-size:13px; color:var(--muted);
+  font-style:italic; text-align:center;
+  margin:18px 0 0;
 }
 
 .letter-stage{ animation: letterUnfold .45s ease; }

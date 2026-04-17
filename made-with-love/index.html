@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Made with Love — for Melissa Mae ♡</title>
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=6" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -116,17 +116,16 @@
   <div id="welcomeModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="envelope-stage" id="envelopeStage">
       <button class="modal-close" data-close>✕</button>
-      <div class="envelope" id="envelope">
-        <div class="env-body"></div>
-        <div class="env-flap"></div>
-        <div class="env-text">
-          <div class="env-to">to my dearest</div>
-          <div class="env-name">Melissa Mae</div>
-        </div>
-        <div class="env-seal">♡</div>
-      </div>
-      <button class="btn btn-soft open-envelope-btn" id="openEnvelopeBtn">open the letter ♡</button>
-      <p class="env-hint">(tap the envelope to open)</p>
+      <button type="button" class="envelope" id="envelope" aria-label="open the letter">
+        <span class="env-body"></span>
+        <span class="env-flap"></span>
+        <span class="env-text">
+          <span class="env-to">to my dearest</span>
+          <span class="env-name">Melissa Mae</span>
+        </span>
+        <span class="env-seal">♡</span>
+      </button>
+      <p class="env-hint">tap the envelope to open ♡</p>
     </div>
     <div class="modal-card letter-card letter-stage hidden" id="letterStage">
       <button class="modal-close" data-close>✕</button>
