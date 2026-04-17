@@ -131,9 +131,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin:20px 0 18px;
 }
 .view-head h2{
-  font-family:'Caveat', cursive;
-  font-size:36px; color:var(--strawberry-d); margin:0; font-weight:700;
-  line-height:1.1;
+  font-family:'Quicksand', sans-serif;
+  font-size:26px; color:var(--strawberry-d); margin:0; font-weight:700;
+  line-height:1.2; letter-spacing:-.01em;
 }
 .sub{ color:var(--muted); margin:4px 0 0; font-size:14px; }
 
@@ -190,8 +190,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   border-radius:2px;
 }
 .sticky-note h4{
-  font-family:'Caveat', cursive;
-  margin:0 0 8px; color:var(--ink); font-size:24px; font-weight:700;
+  font-family:'Quicksand', sans-serif;
+  margin:0 0 8px; color:var(--ink); font-size:15px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.08em;
 }
 .sticky-note ul{ margin:0; padding-left:18px; line-height:1.6; font-size:13px; color:var(--ink); }
 .sticky-note li{ margin-bottom:4px; }
@@ -263,8 +264,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .modal-close:hover{ background:var(--blush) }
 
 .modal-card h3{
-  font-family:'Caveat', cursive;
-  font-size:32px; color:var(--strawberry-d); margin:0 0 6px; font-weight:700;
+  font-family:'Quicksand', sans-serif;
+  font-size:22px; color:var(--strawberry-d); margin:0 0 6px; font-weight:700;
+  letter-spacing:-.01em;
 }
 .modal-card h4{ color:var(--strawberry-d); margin:18px 0 8px; font-size:16px; }
 
@@ -297,63 +299,73 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 /* ================= envelope reveal ================= */
 .envelope-stage{
   position:relative; width:100%; max-width:440px;
-  display:flex; flex-direction:column; align-items:center; gap:22px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
   animation: fadeIn .3s ease;
 }
 .envelope-stage.hidden{ display:none; }
+.envelope-stage .modal-close{
+  top:-12px; right:-12px;
+}
 .envelope{
   position:relative;
-  width:360px; max-width:100%; height:240px;
-  background:var(--cream);
+  width:360px; max-width:92vw; height:220px;
+  cursor:pointer;
+  filter: drop-shadow(0 18px 40px rgba(107,74,53,.3)) drop-shadow(0 3px 6px rgba(107,74,53,.18));
+  transition: transform .25s ease;
+}
+.envelope:hover{ transform: translateY(-4px) rotate(-.5deg); }
+
+/* body: back panel of envelope (cream rectangle) */
+.env-body{
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
   border:2px solid var(--cream-edge);
   border-radius:6px;
-  box-shadow: 0 20px 60px rgba(107,74,53,.35), 0 4px 10px rgba(107,74,53,.2);
-  overflow:hidden;
-  cursor:pointer;
-  transition: transform .25s ease, box-shadow .25s ease;
 }
-.envelope:hover{
-  transform: translateY(-4px) rotate(-.5deg);
-  box-shadow: 0 28px 70px rgba(107,74,53,.4), 0 6px 14px rgba(107,74,53,.25);
-}
-.envelope-flap{
-  position:absolute; top:0; left:0; right:0;
-  height:0; width:0;
-  border-left:180px solid transparent;
-  border-right:180px solid transparent;
-  border-top:120px solid var(--cream-deep);
-  filter: drop-shadow(0 2px 3px rgba(107,74,53,.15));
-  z-index:1;
-}
-.envelope-flap::after{
-  content:""; position:absolute; top:-120px; left:-180px;
-  width:360px; height:120px;
-  border-bottom:1px solid var(--cream-edge);
-}
-.envelope-front{
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  padding:30px 20px 20px;
-  z-index:0;
-}
-.env-to{
-  font-family:'Quicksand', sans-serif; font-size:11px; letter-spacing:.2em;
-  color:var(--muted); text-transform:uppercase; margin-top:60px;
-}
-.env-name{
-  font-family:'Caveat', cursive; font-size:44px; font-weight:700;
-  color:var(--strawberry-d); margin-top:6px; line-height:1;
-}
-.env-seal{
-  position:absolute; top:92px; left:50%; transform:translateX(-50%);
-  width:46px; height:46px; border-radius:50%;
-  background: radial-gradient(circle at 35% 35%, var(--strawberry-l), var(--strawberry) 55%, var(--strawberry-d) 100%);
-  color:#fff; font-size:22px; display:grid; place-items:center;
-  box-shadow: 0 3px 8px rgba(166,94,98,.4), inset 0 -2px 3px rgba(0,0,0,.15);
+
+/* flap: triangle from top corners down to center — the closed flap of the envelope */
+.env-flap{
+  position:absolute; top:-2px; left:-2px; right:-2px;
+  height:60%;
+  background: linear-gradient(180deg, var(--cream-deep) 0%, #e9d7ae 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-top:2px solid var(--cream-edge);
   z-index:2;
 }
-.open-envelope-btn{
-  font-size:15px;
+.env-flap::after{
+  /* subtle crease line along the fold */
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background: rgba(107,74,53,.18);
+}
+
+/* recipient text on the front, below the flap */
+.env-text{
+  position:absolute; left:0; right:0; bottom:24px;
+  text-align:center; z-index:1;
+}
+.env-to{
+  font-family:'Quicksand', sans-serif; font-size:10px; letter-spacing:.3em;
+  color:var(--muted); text-transform:uppercase;
+}
+.env-name{
+  font-family:'Caveat', cursive; font-size:40px; font-weight:700;
+  color:var(--strawberry-d); margin-top:2px; line-height:1;
+}
+
+/* wax seal — sits right at the tip of the folded flap */
+.env-seal{
+  position:absolute; top:calc(60% - 26px); left:50%; transform:translateX(-50%);
+  width:52px; height:52px; border-radius:50%;
+  background: radial-gradient(circle at 35% 32%, var(--strawberry-l), var(--strawberry) 55%, var(--strawberry-d) 100%);
+  color:#fff; font-size:26px; display:grid; place-items:center;
+  box-shadow: 0 4px 10px rgba(166,94,98,.45), inset 0 -3px 4px rgba(0,0,0,.18), inset 0 2px 2px rgba(255,255,255,.25);
+  z-index:3;
+}
+
+.open-envelope-btn{ font-size:15px; }
+.env-hint{
+  font-family:'Quicksand', sans-serif; font-size:12px; color:var(--muted);
+  font-style:italic; margin:-4px 0 0;
 }
 
 .letter-stage{ animation: letterUnfold .45s ease; }
@@ -412,10 +424,11 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .letter-line.spaced{ word-spacing:.3em; }
 
 .letter-h{
-  font-family:'Caveat', cursive;
-  font-size:26px; color:var(--strawberry-d); font-weight:700;
+  font-family:'Quicksand', sans-serif;
+  font-size:13px; color:var(--strawberry-d); font-weight:700;
   margin:22px 0 6px;
   text-align:left;
+  text-transform:uppercase; letter-spacing:.15em;
 }
 .letter-card p{ text-align:left; color:var(--ink); line-height:1.6; font-size:14px; margin:4px 0; }
 .letter-list{ text-align:left; padding-left:22px; color:var(--ink); font-size:14px; line-height:1.7; }
@@ -477,7 +490,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .day-col.today{ border-color:var(--strawberry-l); }
 .day-col h4{
   margin:0 0 4px; color:var(--strawberry-d);
-  font-family:'Caveat', cursive; font-size:26px; font-weight:700;
+  font-family:'Quicksand', sans-serif; font-size:15px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.06em;
 }
 .day-col .date{
   font-size:11px; color:var(--muted); margin-bottom:10px;
@@ -592,8 +606,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .empty-state .big{ font-size:56px; display:block; margin-bottom:10px; }
 .empty-state h3{
-  font-family:'Caveat', cursive;
-  color:var(--strawberry-d); font-size:32px; margin:0 0 6px; font-weight:700;
+  font-family:'Quicksand', sans-serif;
+  color:var(--strawberry-d); font-size:22px; margin:0 0 6px; font-weight:700;
 }
 .empty-state.sweets{ background:linear-gradient(135deg, var(--blush), #fff); }
 .empty-state p{ margin:4px 0; }
