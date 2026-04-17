@@ -961,12 +961,22 @@ document.querySelectorAll('.tab').forEach(btn=>{
 });
 
 /* ============ welcome modal ============ */
-function showWelcome(){ document.getElementById('welcomeModal').classList.remove('hidden'); }
+function showWelcome(){
+  document.getElementById('welcomeModal').classList.remove('hidden');
+  document.getElementById('envelopeStage').classList.remove('hidden');
+  document.getElementById('letterStage').classList.add('hidden');
+}
+function openLetter(){
+  document.getElementById('envelopeStage').classList.add('hidden');
+  document.getElementById('letterStage').classList.remove('hidden');
+}
 function hideWelcome(){
   document.getElementById('welcomeModal').classList.add('hidden');
 }
 document.getElementById('startCookingBtn')?.addEventListener('click', hideWelcome);
 document.getElementById('reopenLetter')?.addEventListener('click', showWelcome);
+document.getElementById('openEnvelopeBtn')?.addEventListener('click', openLetter);
+document.getElementById('envelope')?.addEventListener('click', openLetter);
 
 /* ============ close-modal wiring ============ */
 function closeModal(id){ document.getElementById(id).classList.add('hidden'); }
@@ -1373,6 +1383,7 @@ function openEdit(id){
   document.getElementById('edEmoji').value = r?.emoji || '🍲';
   const edImage = document.getElementById('edImage');
   if(edImage) edImage.value = r?.image || '';
+  updateImagePreview();
   document.getElementById('edIngredients').value = r
     ? r.ingredients.map(i=>`${fmtAmt(i.amt)} ${i.unit} ${i.item}`.trim().replace(/\s+/g,' ')).join('\n')
     : '';
@@ -1398,6 +1409,19 @@ function parseIngredientLine(line){
   }
   return {amt, unit, item: rest};
 }
+
+function updateImagePreview(){
+  const input = document.getElementById('edImage');
+  const box = document.getElementById('edImagePreview');
+  if(!input || !box) return;
+  const url = input.value.trim();
+  if(!url){ box.innerHTML = ''; return; }
+  box.innerHTML = `<img src="${url.replace(/"/g,'&quot;')}" alt="preview" onerror="this.outerHTML='<div class=err>that link didn\\'t load as an image — try a direct .jpg, .png, or .webp URL (right-click → copy image address)</div>'">`;
+}
+document.getElementById('edImage')?.addEventListener('input', ()=>{
+  clearTimeout(window._mwlImgT);
+  window._mwlImgT = setTimeout(updateImagePreview, 400);
+});
 
 document.getElementById('saveRecipeBtn').addEventListener('click',()=>{
   const name = document.getElementById('edName').value.trim();

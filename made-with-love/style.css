@@ -294,6 +294,89 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin-top:20px; flex-wrap:wrap;
 }
 
+/* ================= envelope reveal ================= */
+.envelope-stage{
+  position:relative; width:100%; max-width:440px;
+  display:flex; flex-direction:column; align-items:center; gap:22px;
+  animation: fadeIn .3s ease;
+}
+.envelope-stage.hidden{ display:none; }
+.envelope{
+  position:relative;
+  width:360px; max-width:100%; height:240px;
+  background:var(--cream);
+  border:2px solid var(--cream-edge);
+  border-radius:6px;
+  box-shadow: 0 20px 60px rgba(107,74,53,.35), 0 4px 10px rgba(107,74,53,.2);
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.envelope:hover{
+  transform: translateY(-4px) rotate(-.5deg);
+  box-shadow: 0 28px 70px rgba(107,74,53,.4), 0 6px 14px rgba(107,74,53,.25);
+}
+.envelope-flap{
+  position:absolute; top:0; left:0; right:0;
+  height:0; width:0;
+  border-left:180px solid transparent;
+  border-right:180px solid transparent;
+  border-top:120px solid var(--cream-deep);
+  filter: drop-shadow(0 2px 3px rgba(107,74,53,.15));
+  z-index:1;
+}
+.envelope-flap::after{
+  content:""; position:absolute; top:-120px; left:-180px;
+  width:360px; height:120px;
+  border-bottom:1px solid var(--cream-edge);
+}
+.envelope-front{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  padding:30px 20px 20px;
+  z-index:0;
+}
+.env-to{
+  font-family:'Quicksand', sans-serif; font-size:11px; letter-spacing:.2em;
+  color:var(--muted); text-transform:uppercase; margin-top:60px;
+}
+.env-name{
+  font-family:'Caveat', cursive; font-size:44px; font-weight:700;
+  color:var(--strawberry-d); margin-top:6px; line-height:1;
+}
+.env-seal{
+  position:absolute; top:92px; left:50%; transform:translateX(-50%);
+  width:46px; height:46px; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, var(--strawberry-l), var(--strawberry) 55%, var(--strawberry-d) 100%);
+  color:#fff; font-size:22px; display:grid; place-items:center;
+  box-shadow: 0 3px 8px rgba(166,94,98,.4), inset 0 -2px 3px rgba(0,0,0,.15);
+  z-index:2;
+}
+.open-envelope-btn{
+  font-size:15px;
+}
+
+.letter-stage{ animation: letterUnfold .45s ease; }
+.letter-stage.hidden{ display:none; }
+@keyframes letterUnfold{
+  from{ opacity:0; transform: translateY(30px) scale(.96); }
+  to  { opacity:1; transform: none; }
+}
+
+/* ================= image preview in edit modal ================= */
+.img-preview{
+  margin-top:8px; min-height:0;
+}
+.img-preview img{
+  display:block; max-width:100%; max-height:200px;
+  border-radius:10px; border:2px solid var(--line);
+}
+.img-preview .err{
+  font-size:12px; color:var(--strawberry-d); font-style:italic;
+  padding:8px 12px; background:var(--blush); border-radius:8px;
+  margin-top:4px;
+}
+
 /* ================= welcome / letter modal ================= */
 .letter-card{
   background: var(--cream) !important;
