@@ -81,8 +81,9 @@ body{
 .brand .heart-sm{ color:var(--strawberry); font-size:14px; }
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 .brand h1{
-  font-family:'Caveat', cursive;
-  font-size:44px; color:var(--strawberry-d); margin:4px 0 0; font-weight:700;
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-weight:600;
+  font-size:42px; color:var(--strawberry-d); margin:4px 0 0;
   letter-spacing:.5px;
   text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
@@ -350,8 +351,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .env-name{
   display:block;
-  font-family:'Caveat', cursive; font-size:44px; font-weight:700;
-  color:var(--strawberry-d); margin-top:6px; line-height:1;
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
+  font-size:40px; color:var(--strawberry-d); margin-top:6px; line-height:1;
 }
 
 /* wax seal — sits right at the tip of the folded flap (50% down) */
@@ -405,9 +406,10 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   text-align:center;
 }
 .letter-title{
-  font-family:'Caveat', cursive;
-  font-size:42px; line-height:1; color:var(--strawberry-d);
-  letter-spacing:1px; font-weight:700;
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-weight:600;
+  font-size:46px; line-height:1.1; color:var(--strawberry-d);
+  letter-spacing:2px;
   margin-bottom:6px;
 }
 .letter-subtitle{
@@ -416,7 +418,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin-bottom:24px; letter-spacing:.12em;
   text-transform:lowercase;
 }
-.letter-subtitle span{ font-family:'Caveat', cursive; font-size:24px; color:var(--strawberry); font-weight:700; }
+.letter-subtitle span{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:22px; color:var(--strawberry); font-weight:600; }
 
 .letter-line{
   font-size:12px; color:var(--ink); letter-spacing:.24em;
@@ -424,7 +426,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .letter-line.small{ font-size:10.5px; }
 .letter-line.right{ text-align:right; padding-right:10px; }
-.letter-line.sign{ font-family:'Caveat', cursive; font-size:24px; letter-spacing:.04em; color:var(--strawberry-d); font-weight:700; }
+.letter-line.sign{ font-family:'Cormorant Garamond', serif; font-style:italic; font-size:22px; letter-spacing:.08em; color:var(--strawberry-d); font-weight:600; }
 .letter-line.spaced{ word-spacing:.3em; }
 
 .letter-h{
