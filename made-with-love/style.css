@@ -81,10 +81,10 @@ body{
 .brand .heart-sm{ color:var(--strawberry); font-size:14px; }
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 .brand h1{
-  font-family:'Parisienne', cursive;
-  font-size:62px; color:var(--strawberry-d); margin:4px 0 0; font-weight:400;
+  font-family:'Caveat', cursive;
+  font-size:44px; color:var(--strawberry-d); margin:4px 0 0; font-weight:700;
   letter-spacing:.5px;
-  text-shadow: 0 2px 0 rgba(255,255,255,.6);
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
 }
 .brand .tagline{
   display:block; color:var(--muted); font-size:15px; margin-top:-2px;
@@ -131,8 +131,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin:20px 0 18px;
 }
 .view-head h2{
-  font-family:'Parisienne', cursive;
-  font-size:40px; color:var(--strawberry-d); margin:0;
+  font-family:'Caveat', cursive;
+  font-size:36px; color:var(--strawberry-d); margin:0; font-weight:700;
+  line-height:1.1;
 }
 .sub{ color:var(--muted); margin:4px 0 0; font-size:14px; }
 
@@ -189,8 +190,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   border-radius:2px;
 }
 .sticky-note h4{
-  font-family:'Parisienne', cursive;
-  margin:0 0 8px; color:var(--ink); font-size:22px;
+  font-family:'Caveat', cursive;
+  margin:0 0 8px; color:var(--ink); font-size:24px; font-weight:700;
 }
 .sticky-note ul{ margin:0; padding-left:18px; line-height:1.6; font-size:13px; color:var(--ink); }
 .sticky-note li{ margin-bottom:4px; }
@@ -262,8 +263,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .modal-close:hover{ background:var(--blush) }
 
 .modal-card h3{
-  font-family:'Parisienne', cursive;
-  font-size:34px; color:var(--strawberry-d); margin:0 0 6px;
+  font-family:'Caveat', cursive;
+  font-size:32px; color:var(--strawberry-d); margin:0 0 6px; font-weight:700;
 }
 .modal-card h4{ color:var(--strawberry-d); margin:18px 0 8px; font-size:16px; }
 
@@ -305,9 +306,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   text-align:center;
 }
 .letter-title{
-  font-family:'Parisienne', cursive;
-  font-size:58px; line-height:1.1; color:var(--strawberry-d);
-  letter-spacing:2px; font-weight:400;
+  font-family:'Caveat', cursive;
+  font-size:42px; line-height:1; color:var(--strawberry-d);
+  letter-spacing:1px; font-weight:700;
   margin-bottom:6px;
 }
 .letter-subtitle{
@@ -316,7 +317,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin-bottom:24px; letter-spacing:.12em;
   text-transform:lowercase;
 }
-.letter-subtitle span{ font-family:'Parisienne', cursive; font-size:26px; color:var(--strawberry); }
+.letter-subtitle span{ font-family:'Caveat', cursive; font-size:24px; color:var(--strawberry); font-weight:700; }
 
 .letter-line{
   font-size:12px; color:var(--ink); letter-spacing:.24em;
@@ -324,12 +325,12 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .letter-line.small{ font-size:10.5px; }
 .letter-line.right{ text-align:right; padding-right:10px; }
-.letter-line.sign{ font-family:'Parisienne', cursive; font-size:22px; letter-spacing:.1em; color:var(--strawberry-d); }
+.letter-line.sign{ font-family:'Caveat', cursive; font-size:24px; letter-spacing:.04em; color:var(--strawberry-d); font-weight:700; }
 .letter-line.spaced{ word-spacing:.3em; }
 
 .letter-h{
-  font-family:'Parisienne', cursive;
-  font-size:26px; color:var(--strawberry-d);
+  font-family:'Caveat', cursive;
+  font-size:26px; color:var(--strawberry-d); font-weight:700;
   margin:22px 0 6px;
   text-align:left;
 }
@@ -393,7 +394,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .day-col.today{ border-color:var(--strawberry-l); }
 .day-col h4{
   margin:0 0 4px; color:var(--strawberry-d);
-  font-family:'Parisienne', cursive; font-size:24px;
+  font-family:'Caveat', cursive; font-size:26px; font-weight:700;
 }
 .day-col .date{
   font-size:11px; color:var(--muted); margin-bottom:10px;
@@ -508,8 +509,8 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .empty-state .big{ font-size:56px; display:block; margin-bottom:10px; }
 .empty-state h3{
-  font-family:'Parisienne', cursive;
-  color:var(--strawberry-d); font-size:32px; margin:0 0 6px;
+  font-family:'Caveat', cursive;
+  color:var(--strawberry-d); font-size:32px; margin:0 0 6px; font-weight:700;
 }
 .empty-state.sweets{ background:linear-gradient(135deg, var(--blush), #fff); }
 .empty-state p{ margin:4px 0; }
@@ -549,7 +550,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 
 /* ================= responsive ================= */
 @media (max-width: 900px){
-  .brand h1{ font-size:42px; }
+  .brand h1{ font-size:36px; }
   main{ padding:16px 18px 60px; }
   .topbar{ padding:22px 18px 8px; }
   .week-grid{ grid-template-columns:1fr; }

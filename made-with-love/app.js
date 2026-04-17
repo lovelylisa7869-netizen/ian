@@ -964,7 +964,6 @@ document.querySelectorAll('.tab').forEach(btn=>{
 function showWelcome(){ document.getElementById('welcomeModal').classList.remove('hidden'); }
 function hideWelcome(){
   document.getElementById('welcomeModal').classList.add('hidden');
-  localStorage.setItem(LETTER_SEEN_KEY, '1');
 }
 document.getElementById('startCookingBtn')?.addEventListener('click', hideWelcome);
 document.getElementById('reopenLetter')?.addEventListener('click', showWelcome);
@@ -1440,4 +1439,4 @@ document.querySelectorAll('#chipRow .chip').forEach(c=>{
   c.classList.toggle('active', c.dataset.cat === state.currentCategory);
 });
 renderCookbook();
-if(!localStorage.getItem(LETTER_SEEN_KEY)) showWelcome();
+showWelcome();
