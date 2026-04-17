@@ -1,20 +1,23 @@
-/* ================= Made with Love — for Melissa Mae ================= */
+/* ================= Made with Love — for Melissa Mae (Calico Critters) ================= */
 :root{
-  --cream:        #fff8ee;
-  --cream-deep:   #f5ead5;
-  --cream-edge:   #ead9b5;
-  --strawberry:   #e63946;
-  --strawberry-d: #b8324d;
-  --strawberry-l: #f68191;
-  --leaf:         #3fa755;
-  --leaf-deep:    #2e7a3f;
-  --leaf-soft:    #b8dcba;
-  --flower-ctr:   #ffd04d;
-  --ink:          #4a2e3e;
-  --muted:        #8c7a6c;
-  --blush:        #ffd5e0;
-  --line:         #ead9b5;
-  --shadow:       0 10px 25px rgba(139,82,60,.12), 0 2px 6px rgba(139,82,60,.08);
+  --cream:        #fdf6e9;
+  --cream-deep:   #f1e5ce;
+  --cream-edge:   #e0cda6;
+  --strawberry:   #d48688;   /* dusty blush (primary accent) */
+  --strawberry-d: #a65e62;   /* deep rose (headings) */
+  --strawberry-l: #f4c2c4;   /* soft blush */
+  --leaf:         #9cbf93;   /* sage green */
+  --leaf-deep:    #6c9a63;   /* deeper sage */
+  --leaf-soft:    #d6e6cf;   /* powder sage */
+  --flower-ctr:   #ffdb8a;   /* butter yellow */
+  --ink:          #5a4332;   /* warm brown ink */
+  --muted:        #9d8776;   /* taupe */
+  --blush:        #ffe4e8;   /* powder pink */
+  --powder:       #c8dae8;   /* powder blue accent */
+  --acorn:        #a07858;   /* wood brown */
+  --acorn-d:      #6b4a35;   /* deep wood */
+  --line:         #e0cda6;
+  --shadow:       0 10px 25px rgba(107,74,53,.12), 0 2px 6px rgba(107,74,53,.08);
   --radius:       18px;
 }
 
@@ -32,28 +35,37 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= strawberry + flower backdrop ================= */
+/* ================= Calico Critters cottage backdrop ================= */
 .bg-patch{
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background-image:
-    /* strawberries (red circles with green top + seed dots) */
-    radial-gradient(ellipse 18px 22px at 8% 12%, var(--strawberry) 0 80%, transparent 82%),
-    radial-gradient(ellipse 14px 18px at 92% 18%, var(--strawberry) 0 80%, transparent 82%),
-    radial-gradient(ellipse 16px 20px at 5% 78%, var(--strawberry) 0 80%, transparent 82%),
-    radial-gradient(ellipse 15px 19px at 95% 68%, var(--strawberry) 0 80%, transparent 82%),
-    radial-gradient(ellipse 12px 16px at 15% 45%, var(--strawberry) 0 80%, transparent 82%),
-    radial-gradient(ellipse 13px 17px at 85% 92%, var(--strawberry) 0 80%, transparent 82%),
-    /* white 5-petal flowers (yellow center + white petals approximated) */
-    radial-gradient(circle 5px at 22% 8%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    radial-gradient(circle 5px at 78% 12%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    radial-gradient(circle 4px at 12% 88%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    radial-gradient(circle 5px at 88% 80%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    radial-gradient(circle 4px at 45% 5%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    radial-gradient(circle 4px at 55% 95%, var(--flower-ctr) 0 50%, #fff 52% 100%),
-    /* little green leaves */
-    radial-gradient(ellipse 10px 4px at 8% 10%, var(--leaf) 0 80%, transparent 82%),
-    radial-gradient(ellipse 10px 4px at 92% 16%, var(--leaf) 0 80%, transparent 82%);
-  opacity:.22;
+    /* blush mushroom caps (half-circle rose) */
+    radial-gradient(circle 14px at 8% 12%, var(--strawberry) 0 55%, transparent 58%),
+    radial-gradient(circle 12px at 92% 18%, var(--strawberry) 0 55%, transparent 58%),
+    radial-gradient(circle 16px at 5% 78%, var(--strawberry-l) 0 55%, transparent 58%),
+    radial-gradient(circle 13px at 95% 68%, var(--strawberry) 0 55%, transparent 58%),
+    /* tiny acorn dots (warm brown) */
+    radial-gradient(ellipse 8px 10px at 15% 45%, var(--acorn) 0 80%, transparent 82%),
+    radial-gradient(ellipse 7px 9px at 85% 42%, var(--acorn) 0 80%, transparent 82%),
+    radial-gradient(ellipse 8px 10px at 85% 92%, var(--acorn) 0 80%, transparent 82%),
+    radial-gradient(ellipse 6px 8px at 25% 92%, var(--acorn-d) 0 80%, transparent 82%),
+    /* little forest flowers (butter center + blush petals) */
+    radial-gradient(circle 5px at 22% 8%, var(--flower-ctr) 0 45%, var(--blush) 48% 100%),
+    radial-gradient(circle 5px at 78% 12%, var(--flower-ctr) 0 45%, var(--blush) 48% 100%),
+    radial-gradient(circle 4px at 12% 88%, var(--flower-ctr) 0 45%, #fff 48% 100%),
+    radial-gradient(circle 5px at 88% 80%, var(--flower-ctr) 0 45%, var(--blush) 48% 100%),
+    radial-gradient(circle 4px at 45% 5%, var(--flower-ctr) 0 45%, #fff 48% 100%),
+    radial-gradient(circle 4px at 55% 95%, var(--flower-ctr) 0 45%, var(--blush) 48% 100%),
+    radial-gradient(circle 3px at 35% 60%, var(--flower-ctr) 0 45%, var(--powder) 48% 100%),
+    radial-gradient(circle 3px at 65% 30%, var(--flower-ctr) 0 45%, var(--powder) 48% 100%),
+    /* clover leaves (sage) */
+    radial-gradient(circle 6px at 18% 30%, var(--leaf) 0 70%, transparent 72%),
+    radial-gradient(circle 6px at 21% 32%, var(--leaf) 0 70%, transparent 72%),
+    radial-gradient(circle 6px at 19% 34%, var(--leaf-deep) 0 70%, transparent 72%),
+    radial-gradient(circle 6px at 80% 60%, var(--leaf) 0 70%, transparent 72%),
+    radial-gradient(circle 6px at 83% 62%, var(--leaf) 0 70%, transparent 72%),
+    radial-gradient(circle 6px at 81% 64%, var(--leaf-deep) 0 70%, transparent 72%);
+  opacity:.28;
 }
 
 /* ================= topbar ================= */
@@ -69,8 +81,8 @@ body{
 .brand .heart-sm{ color:var(--strawberry); font-size:14px; }
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 .brand h1{
-  font-family:'Dancing Script', cursive;
-  font-size:56px; color:var(--strawberry-d); margin:4px 0 0; font-weight:700;
+  font-family:'Parisienne', cursive;
+  font-size:62px; color:var(--strawberry-d); margin:4px 0 0; font-weight:400;
   letter-spacing:.5px;
   text-shadow: 0 2px 0 rgba(255,255,255,.6);
 }
@@ -86,7 +98,7 @@ body{
   padding:4px 12px; border-radius:999px;
   transition: background .15s;
 }
-.letter-link:hover{ background:rgba(230,57,70,.08); }
+.letter-link:hover{ background:rgba(212,134,136,.08); }
 
 .tabs{
   display:flex; gap:8px; justify-content:center;
@@ -119,7 +131,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin:20px 0 18px;
 }
 .view-head h2{
-  font-family:'Dancing Script', cursive;
+  font-family:'Parisienne', cursive;
   font-size:40px; color:var(--strawberry-d); margin:0;
 }
 .sub{ color:var(--muted); margin:4px 0 0; font-size:14px; }
@@ -134,7 +146,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   background:linear-gradient(135deg, var(--strawberry), var(--strawberry-d));
   color:#fff; box-shadow:var(--shadow);
 }
-.btn-soft:hover{ transform:translateY(-1px); box-shadow:0 14px 30px rgba(184,50,77,.25); }
+.btn-soft:hover{ transform:translateY(-1px); box-shadow:0 14px 30px rgba(166,94,98,.25); }
 .btn-soft.big{ padding:14px 32px; font-size:16px; }
 .btn-ghost{
   background:#fff; color:var(--leaf-deep); border-color:var(--line);
@@ -155,7 +167,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .chip:hover{ background:var(--cream); border-color:var(--leaf-soft); }
 .chip.active{
   background:var(--strawberry); color:#fff; border-color:var(--strawberry);
-  box-shadow:0 4px 12px rgba(230,57,70,.25);
+  box-shadow:0 4px 12px rgba(212,134,136,.25);
 }
 
 /* ================= sticky-note tips ================= */
@@ -173,11 +185,11 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .sticky-note::before{
   content:""; position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-  width:70px; height:16px; background:rgba(230,57,70,.35);
+  width:70px; height:16px; background:rgba(212,134,136,.35);
   border-radius:2px;
 }
 .sticky-note h4{
-  font-family:'Dancing Script', cursive;
+  font-family:'Parisienne', cursive;
   margin:0 0 8px; color:var(--ink); font-size:22px;
 }
 .sticky-note ul{ margin:0; padding-left:18px; line-height:1.6; font-size:13px; color:var(--ink); }
@@ -229,7 +241,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 /* ================= modal shared ================= */
 .modal{
   position:fixed; inset:0; z-index:50;
-  background:rgba(74,46,62,.4); backdrop-filter: blur(4px);
+  background:rgba(107,74,53,.4); backdrop-filter: blur(4px);
   display:flex; align-items:center; justify-content:center; padding:20px;
   animation:fadeIn .2s ease;
 }
@@ -237,7 +249,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .modal-card{
   background:#fff; border-radius:24px;
   max-width:640px; width:100%; max-height:90vh; overflow-y:auto;
-  padding:32px; position:relative; box-shadow:0 20px 60px rgba(74,46,62,.3);
+  padding:32px; position:relative; box-shadow:0 20px 60px rgba(107,74,53,.3);
   border:2px solid var(--line);
 }
 .modal-card.small{ max-width:460px; }
@@ -250,7 +262,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .modal-close:hover{ background:var(--blush) }
 
 .modal-card h3{
-  font-family:'Dancing Script', cursive;
+  font-family:'Parisienne', cursive;
   font-size:34px; color:var(--strawberry-d); margin:0 0 6px;
 }
 .modal-card h4{ color:var(--strawberry-d); margin:18px 0 8px; font-size:16px; }
@@ -293,9 +305,9 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   text-align:center;
 }
 .letter-title{
-  font-family:'Dancing Script', cursive;
-  font-size:52px; line-height:1; color:var(--strawberry-d);
-  letter-spacing:8px; font-weight:700;
+  font-family:'Parisienne', cursive;
+  font-size:58px; line-height:1.1; color:var(--strawberry-d);
+  letter-spacing:2px; font-weight:400;
   margin-bottom:6px;
 }
 .letter-subtitle{
@@ -304,7 +316,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   margin-bottom:24px; letter-spacing:.12em;
   text-transform:lowercase;
 }
-.letter-subtitle span{ font-family:'Dancing Script', cursive; font-size:26px; color:var(--strawberry); }
+.letter-subtitle span{ font-family:'Parisienne', cursive; font-size:26px; color:var(--strawberry); }
 
 .letter-line{
   font-size:12px; color:var(--ink); letter-spacing:.24em;
@@ -312,11 +324,11 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .letter-line.small{ font-size:10.5px; }
 .letter-line.right{ text-align:right; padding-right:10px; }
-.letter-line.sign{ font-family:'Dancing Script', cursive; font-size:22px; letter-spacing:.1em; color:var(--strawberry-d); }
+.letter-line.sign{ font-family:'Parisienne', cursive; font-size:22px; letter-spacing:.1em; color:var(--strawberry-d); }
 .letter-line.spaced{ word-spacing:.3em; }
 
 .letter-h{
-  font-family:'Dancing Script', cursive;
+  font-family:'Parisienne', cursive;
   font-size:26px; color:var(--strawberry-d);
   margin:22px 0 6px;
   text-align:left;
@@ -331,7 +343,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
   color:#fff; padding:14px 18px; border-radius:12px;
   font-weight:700; font-size:14px; letter-spacing:.02em;
   margin:20px 0 20px;
-  box-shadow: 0 6px 16px rgba(230,57,70,.25);
+  box-shadow: 0 6px 16px rgba(212,134,136,.25);
 }
 .no-stress span{ display:block; font-weight:400; font-size:12px; font-style:italic; margin-top:4px; opacity:.9; }
 
@@ -381,7 +393,7 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 .day-col.today{ border-color:var(--strawberry-l); }
 .day-col h4{
   margin:0 0 4px; color:var(--strawberry-d);
-  font-family:'Dancing Script', cursive; font-size:24px;
+  font-family:'Parisienne', cursive; font-size:24px;
 }
 .day-col .date{
   font-size:11px; color:var(--muted); margin-bottom:10px;
@@ -496,10 +508,10 @@ main{ position:relative; z-index:1; padding: 20px 40px 80px; max-width:1400px; m
 }
 .empty-state .big{ font-size:56px; display:block; margin-bottom:10px; }
 .empty-state h3{
-  font-family:'Dancing Script', cursive;
+  font-family:'Parisienne', cursive;
   color:var(--strawberry-d); font-size:32px; margin:0 0 6px;
 }
-.empty-state.sweets{ background:linear-gradient(135deg, #fff0f3, #fff); }
+.empty-state.sweets{ background:linear-gradient(135deg, var(--blush), #fff); }
 .empty-state p{ margin:4px 0; }
 
 /* ================= saved ================= */
